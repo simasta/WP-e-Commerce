@@ -1114,7 +1114,8 @@ class WPSC_Cart {
 			$method = $this->selected_shipping_method;
 		}
 		foreach ( ( array ) $this->cart_items as $cart_item ) {
-			$total += $cart_item->calculate_shipping( $method );
+			// non-numeric  fixed
+			$total += (int)$cart_item->calculate_shipping( $method );
 		}
 		if ( $method == $this->selected_shipping_method ) {
 			$this->total_item_shipping = $total;
