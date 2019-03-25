@@ -592,6 +592,11 @@ function wpsc_submit_checkout( $collected_data = true ) {
 		$form_validity = $wpsc_checkout->validate_forms();
 		extract( $form_validity ); // extracts $is_valid and $error_messages
 
+		// array from $form_validity fixed
+		if ( ! is_array( $error_messages ) ) {
+			$error_messages = array();
+		}
+
 		if ( wpsc_has_tnc() && ( ! isset( $_POST['agree'] ) || $_POST['agree'] != 'yes' ) ) {
 			$error_messages[] = __( 'Please agree to the terms and conditions, otherwise we cannot process your order.', 'wp-e-commerce' );
 			$is_valid = false;
